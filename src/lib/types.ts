@@ -46,6 +46,7 @@ export interface RentalRequest {
   moveInDate: string;
   message?: string | null;
   createdAt: string;
+  updatedAt: string;
   tenantId: string;
   propertyId: string;
   property?: Property;

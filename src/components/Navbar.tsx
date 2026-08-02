@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Home, LogOut } from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";
 import { Button } from "./ui/Button";
+import { NotificationBell } from "./NotificationBell";
 
 export function Navbar() {
   const { user, logout } = useAuthStore();
@@ -36,6 +37,7 @@ export function Navbar() {
               <Link href={dashboardHref} className="text-sm text-ink hover:text-forest">
                 Dashboard
               </Link>
+              <NotificationBell />
               <span className="hidden text-sm text-stone sm:inline">Hi, {user.name.split(" ")[0]}</span>
               <Button variant="ghost" onClick={handleLogout} className="!px-3">
                 <LogOut className="h-4 w-4" />
