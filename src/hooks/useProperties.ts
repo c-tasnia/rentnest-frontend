@@ -82,7 +82,9 @@ export function useUpdateProperty(id: string) {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input: Partial<PropertyInput> & { status?: string }) => {
-      const res = await api.put<ApiSuccess<Property>>(`/landlord/properties/${id}`, input);
+      const { status, ...rest } = input;
+      const payload = { ...toPropertyPayload(rest as PropertyInput), ...(status ? { status } : {}) };
+      const res = await api.put<ApiSuccess<Property>>(`/landlord/properties/${id}`, payload);
       return res.data.data;
     },
     onSuccess: () => {
@@ -91,7 +93,6 @@ export function useUpdateProperty(id: string) {
     },
   });
 }
-
 export function useDeleteProperty() {
   const qc = useQueryClient();
   return useMutation({
